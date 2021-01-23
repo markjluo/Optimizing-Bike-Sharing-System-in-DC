@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSE6242 Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+       .img-fluid {
+           width: 100%
+       }
+       footer {	margin: 20px; padding: 20px 0 20px ;	background: #d2d7e4;}
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CSE6242</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="./3-output_data_cluster/html map/201808_map.html">Cluster Map</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Interpretation <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="4-data_interpretation/html/201808 data interpretation em scaled.html">EM Scaled</a></li>
+                        <li><a href="4-data_interpretation/html/201808%20data%20interpretation%20kmeans%20scaled.html">Kmeans Scaled</a></li>
+                        <li><a href="4-data_interpretation/html/201808 data interpretation.html">Data Interpretation</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imbalance Ratio <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="5-imbalance_ratio/html/imbalance ratio.html">Imbalance Heatmap</a></li>
+                        <li><a href="7-EDA/EDA_Imbalance_Ratio.html">Distribution of Imbalance Ratio</a></li>
+                        <li><a href="7-EDA/EDA_Imbalance_bike_differece.html">Imbalance Bike Difference</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Optimization <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="6-optimization/html/optimization-cluster0.html">Cluster 0</a></li>
+                        <li><a href="6-optimization/html/optimization-cluster2.html">Cluster 2</a></li>
+                        <li><a href="6-optimization/html/optimization-cluster3.html">Cluster 3</a></li>
+                        <li><a href="6-optimization/html/optimization-cluster4.html">Cluster 4</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--<div class="container">-->
+<!--    <div class="page-header">-->
+<!--        <h1>Optimizing Bike Sharing System</h1>-->
+<!--        <h2>in Washington DC</h2>-->
+<!--    </div>-->
+
+<!--</div>-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h2>
+                    Optimizing Bike Sharing System
+                </h2>
+                <h3>in Washington DC</h3>
+                <p>
+                    Bike sharing has become an essential
+                    mean of transportation in many major
+                    cities. To tackle the uneven flow of
+                    bikes within the system, bike providers
+                    use trucks to relocate bikes during
+                    midnight. The traditional manual bike
+                    relocation method is irresponsive
+                    during the day, and the experiencebased path planning for relocating
+                    bike is costly and inefficient
+                </p>
+<!--                <p>-->
+<!--                    <a class="btn btn-primary btn-large" href="#">Learn more</a>-->
+<!--                </p>-->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h2>
+                Cluster Map
+            </h2>
+            <div class="col-xs-6">
+                <p>
+                    Analyze Imbalance Issue clustering
+
+                </p>
+                <p>
+                    • K-means & Expectation Maximization
+                </p>
+
+                <p>
+                    • Explore activity patterns within each cluster
+                </p>
+                <p>
+                    <a class="btn" href="./3-output_data_cluster/html map/201808_map.html">View details »</a>
+                </p>
+
+            </div>
+            <div class="col-xs-6">
+                <img src="./img/clustering_map.png" class="img-fluid" alt="Clustering Map">
+            </div>
+        </div>
+        <div class="row">
+            <h2>
+                Data Interpretation
+            </h2>
+            <div class="col-xs-6">
+                <p>
+                    <a class="btn" href="./4-data_interpretation/html/201808 data interpretation em scaled.html">EM »</a>
+                </p>
+                <p>
+                    <a class="btn" href="./4-data_interpretation/html/201808 data interpretation kmeans scaled.html">K Means »</a>
+                </p>
+                <p>
+                    <a class="btn" href="./4-data_interpretation/html/201808 data interpretation.html">Actual Value »</a>
+                </p>
+
+            </div>
+            <div class="col-xs-6">
+                <img src="./img/data_interpretation.png" class="img-fluid" alt="data_interpretation">
+            </div>
+        </div>
+        <div class="row">
+            <h2>
+                Imbalance Ratio
+            </h2>
+            <div class="col-xs-6">
+                <p>
+                    Detect imbalance patterns and other insights
+
+                </p>
+                <p>
+                    <a class="btn" href="./5-imbalance_ratio/html/imbalance ratio.html">Imbalance Heatmap »</a>
+                </p>
+                <p>
+                    <a class="btn" href="7-EDA/EDA_Imbalance_Ratio.html">Distribution of Imbalance Ratio »</a>
+                </p>
+                <p>
+                    <a class="btn" href="7-EDA/EDA_Imbalance_bike_differece.html">Imbalance Bike Difference »</a>
+                </p>
+            </div>
+            <div class="col-xs-6">
+                <img src="./img/imbalance.png" class="img-fluid" alt="imbalance">
+            </div>
+        </div>
+        <div class="row">
+            <h2>
+                Optimization
+            </h2>
+            <div class="col-xs-6">
+                <p>
+                    Improve Relocate Efficiency
+                </p>
+                <p>
+                    • Build path planning model based on TSP
+                </p>
+                <p>
+                    • Find the optimal routes for bike delivery
+                </p>
+                <p>
+                    <a class="btn" href="./6-optimization/html/optimization-cluster0.html">View details »</a>
+                </p>
+
+            </div>
+            <div class="col-xs-6">
+                <img src="./img/optimization.png" class="img-fluid" alt="Optimization">
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Footer -->
+<!--<footer class="page-footer font-small blue">-->
+<footer id="footer" class="footer-1">
+    <div class="col-md-12 text-center">
+        <p>Qihang Zhang, Lan Wang, Jiatuan Luo, Jin Oh Kim, Jiaqi Jiang, Yanxin Ye </p>
+    </div>
+</footer>
+</body>
+</html>

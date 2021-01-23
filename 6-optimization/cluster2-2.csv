@@ -1,0 +1,14 @@
+index,station_id,num_bikes_available,num_docks_available,Station,Unnamed: 0,Cluster Label,EM Label,name,longitude,latitude
+1,116,0,15,31304,227,2-2,2,36th & Calvert St NW / Glover Park,-77.070334,38.922581
+9,376,0,19,31316,238,2-2,1,Yuma St & Tenley Circle NW,-77.08059,38.946182
+5,265,8,1,32008,370,2-2,1,Cordell & Norfolk Ave,-77.098029,38.989540000000005
+10,401,16,2,31318,240,2-2,1,Connecticut Ave & Yuma St NW,-77.065115,38.947156
+8,314,1,14,31313,235,2-2,0,Connecticut Ave & Tilden St NW,-77.061977237463,38.94113915653008
+7,296,2,9,32035,384,2-2,1,Georgia Ave & Spring St,-77.03155500000001,38.999388
+12,455,14,1,31412,254,2-2,0,3rd St & Riggs Rd NE,-77.002239,38.957463
+6,286,0,15,32025,378,2-2,1,Carroll & Westmoreland Ave,-77.01120999999999,38.975
+11,449,2,13,31414,256,2-2,1,Georgia Ave & Piney Branch Rd NW,-77.027976,38.967504999999996
+4,258,2,13,32001,366,2-2,0,Fenton St & New York Ave ,-77.02308199999999,38.985403999999996
+0,65,0,11,31402,246,2-2,0,14th St Heights / 14th & Crittenden St NW,-77.032818,38.947774
+3,218,1,18,31407,251,2-2,1,14th St & Colorado Ave NW,-77.032947,38.956432
+2,217,2,17,31406,250,2-2,0,14th & Upshur St NW,-77.0326781272888,38.94247535560285

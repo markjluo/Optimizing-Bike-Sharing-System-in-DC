@@ -1,0 +1,10 @@
+index,station_id,num_bikes_available,num_docks_available,Station,Unnamed: 0,Cluster Label,EM Label,name,longitude,latitude
+2,285,1,10,32024,377,3,0,Fenton St & Gist Ave,-77.023854,38.989724
+0,93,2,13,31504,262,3,0,10th & Monroe St NE,-76.992889,38.932514000000005
+5,373,19,0,31712,334,3,2,Oklahoma Ave & D St NE,-76.974828,38.894474
+7,458,17,1,31645,326,3,2,6th & K St NE,-76.99838876724245,38.90235129497938
+1,216,2,17,31405,249,3,0,Georgia Ave & Emerson St NW,-77.027333,38.949662
+4,364,1,10,31095,89,3,0,Army Navy Dr & S Nash St,-77.06812083721161,38.862150245214906
+6,428,0,11,32204,406,3,0,Tysons Corner Station,-77.222115,38.920939000000004
+3,325,17,2,32045,390,3,0,Shady Grove Metro West,-77.166093,39.119765
+8,478,1,10,32068,400,3,0,Columbus Ave & Tribeca St,-77.1673,39.126

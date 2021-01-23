@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Routes Class 2</title>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.3.0/mapbox.directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' type='text/css' />
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.3.0/mapbox.directions.css' type='text/css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mapbox-map {
+            position: absolute;
+            top: 5%;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #inputs-directions {
+            position: absolute;
+            width: 33.3333%;
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        .leaflet-div-icon {
+            background: transparent;
+            border: none;
+        }
+
+        .leaflet-marker-icon .number{
+            position: relative;
+            /*top: -37px;*/
+            font-size: 12px;
+            width: 25px;
+            text-align: center;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CSE6242</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a href="../../index.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="../../3-output_data_cluster/html map/201808_map.html">Cluster Map</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Interpretation <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../4-data_interpretation/html/201808 data interpretation em scaled.html">EM Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808%20data%20interpretation%20kmeans%20scaled.html">Kmeans Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808 data interpretation.html">Data Interpretation</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imbalance Ratio <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../5-imbalance_ratio/html/imbalance ratio.html">Imbalance Heatmap</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_Ratio.html">Distribution of Imbalance Ratio</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_bike_differece.html">Imbalance Bike Difference</a></li>
+
+                    </ul>
+                </li>
+                <li  class="active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Optimization <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../6-optimization/html/optimization-cluster0.html">Cluster 0</a></li>
+                        <li class="active"><a href="../../6-optimization/html/optimization-cluster2.html">Cluster 2</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster3.html">Cluster 3</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster4.html">Cluster 4</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="mapbox-map"></div>
+<div id="inputs-directions"></div>
+
+<script>
+    L.NumberedDivIcon = L.Icon.extend({
+        options: {
+            // EDIT THIS TO POINT TO THE FILE AT http://www.charliecroom.com/marker_hole.png (or your own marker)
+            iconUrl: '',
+            number: '',
+            shadowUrl: null,
+            iconSize: new L.Point(25, 41),
+            iconAnchor: new L.Point(13, 41),
+            popupAnchor: new L.Point(0, -33),
+            /*
+            iconAnchor: (Point)
+            popupAnchor: (Point)
+            */
+            className: 'leaflet-div-icon'
+        },
+
+        createIcon: function () {
+            var div = document.createElement('div');
+            var img = this._createImg(this.options['iconUrl']);
+            var numdiv = document.createElement('div');
+            numdiv.setAttribute ( "class", "number" );
+            numdiv.innerHTML = this.options['number'] || '';
+            div.appendChild ( img );
+            div.appendChild ( numdiv );
+            this._setIconStyles(div, 'icon');
+            return div;
+        },
+
+        //you could change this to add a shadow like in the normal marker if you really wanted
+        createShadow: function () {
+            return null;
+        }
+    });
+
+    L.mapbox.accessToken =
+        'pk.eyJ1IjoiY2hpbnRoYWthIiwiYSI6ImM4NTZiMzc2NjZlN2JiNDBlYmU3NDhkMzI4NGVmZmY1In0.hSQ4cDC4TQlQrvHq8t4PVg';
+    var map = L.mapbox.map('mapbox-map', 'mapbox.streets', {
+        zoomControl: true,
+        dragging: true,
+        attributionControl:true,
+    }).setView([38.900283,-77.029822], 12);
+
+    map.attributionControl.setPosition('bottomleft');
+
+    var directions = L.mapbox.directions({
+        profile: 'mapbox.driving',
+        units: 'imperial',
+    });
+
+
+    //cluster 2.0
+    var longitude_0 = [
+        -77.031887,
+        -77.048728,
+        -77.0387,
+        -77.00495,
+        -77.0259,
+        -77.027112,
+        -77.02714,
+        -77.0222,
+        -77.022155,
+        -77.0323,
+        -77.032523,
+        -77.01597,
+        -77.032375,
+        -77.000349,
+        -76.991016,
+        -76.985238,
+        -76.9769,
+        -76.983326,
+        -77.001949,
+        -77.02305436,
+        -77.024649
+    ];
+
+
+
+    var latitude_0 = [
+        38.921074,
+        38.909394,
+        38.9121,
+        38.910972,
+        38.9172,
+        38.925636,
+        38.90843,
+        38.9155,
+        38.912719,
+        38.9086,
+        38.912681,
+        38.917622,
+        38.925284,
+        38.889955,
+        38.933668,
+        38.866611,
+        38.8896,
+        38.889908,
+        38.900412,
+        38.8786936,
+        38.936043
+    ];
+
+
+
+    var directions_0 = L.mapbox.directions();
+    var directionsLayer = L.mapbox.directions.layer(directions_0).addTo(map);
+    var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions_0).addTo(map);
+    directions_0.setOrigin(L.latLng(latitude_0[0],longitude_0[0]));
+
+    for (i = 1; i <latitude_0.length-1; i++) {
+        directions_0.addWaypoint(i,L.latLng(latitude_0[i],longitude_0[i]));
+        L.marker([latitude_0[i],longitude_0[i]],{
+            icon:   new L.NumberedDivIcon({number: i})
+        }).addTo(map);
+    }
+
+    directions_0.setDestination(L.latLng(latitude_0[latitude_0.length-1],longitude_0[latitude_0.length-1]));
+    directions_0.query();
+
+
+    //cluster 2.1
+    var longitude_1 = [
+        -77.076131,
+        -77.072315,
+        -77.080319,
+        -77.05323,
+        -77.1207,
+        -77.142317,
+        -77.12712,
+        -77.107735,
+        -77.095431,
+        -77.09713,
+        -77.075104,
+        -77.049265,
+        -77.05003,
+        -77.044664,
+        -77.085931,
+        -77.086599,
+        -77.090792,
+        -77.08596
+    ];
+    var latitude_1 = [
+        38.866471,
+        38.867262,
+        38.863833,
+        38.858971,
+        38.87887,
+        38.886048,
+        38.876528,
+        38.876393,
+        38.84736,
+        38.895377,
+        38.847977,
+        38.822738,
+        38.865553,
+        38.810743,
+        38.8444,
+        38.862478,
+        38.88081,
+        38.880705
+    ];
+
+    var directions_1 = L.mapbox.directions();
+    var directionsLayer = L.mapbox.directions.layer(directions_1).addTo(map);
+    var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions_1).addTo(map);
+    directions_1.setOrigin(L.latLng(latitude_1[0],longitude_1[0]));
+
+    for (i = 1; i <latitude_1.length-1; i++) {
+        directions_1.addWaypoint(i,L.latLng(latitude_1[i],longitude_1[i]));
+        L.marker([latitude_1[i],longitude_1[i]],{
+            icon:   new L.NumberedDivIcon({number: i})
+        }).addTo(map);
+    }
+
+    directions_1.setDestination(L.latLng(latitude_1[latitude_1.length-1],longitude_1[latitude_1.length-1]));
+    directions_1.query();
+
+
+
+    //cluster 2.2
+    var longitude_2 = [
+        -77.070334,
+        -77.08059,
+        -77.098029,
+        -77.065115,
+        -77.06197724,
+        -77.031555,
+        -77.002239,
+        -77.01121,
+        -77.027976,
+        -77.023082,
+        -77.032818,
+        -77.032947,
+        -77.03267813
+    ];
+    var latitude_2 = [
+        38.922581,
+        38.946182,
+        38.98954,
+        38.947156,
+        38.94113916,
+        38.999388,
+        38.957463,
+        38.975,
+        38.967505,
+        38.985404,
+        38.947774,
+        38.956432,
+        38.94247536
+    ];
+
+    var directions_2 = L.mapbox.directions();
+    var directionsLayer = L.mapbox.directions.layer(directions_2).addTo(map);
+    var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions_2).addTo(map);
+    directions_2.setOrigin(L.latLng(latitude_2[0],longitude_2[0]));
+
+    for (i = 1; i <latitude_2.length-1; i++) {
+        directions_2.addWaypoint(i,L.latLng(latitude_2[i],longitude_2[i]));
+        L.marker([latitude_2[i],longitude_2[i]],{
+            icon:   new L.NumberedDivIcon({number: i})
+        }).addTo(map);
+    }
+
+    directions_2.setDestination(L.latLng(latitude_2[latitude_2.length-1],longitude_2[latitude_2.length-1]));
+    directions_2.query();
+
+</script>
+</body>
+
+</html>

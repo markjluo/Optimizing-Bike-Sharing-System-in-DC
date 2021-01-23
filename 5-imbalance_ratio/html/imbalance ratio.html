@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Washington DC Bike Station Imbalance Ratio Heatmap</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        body { margin:0; padding:0; }
+        #graphDiv { position:absolute; top:5%; bottom:0%; width:100%; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CSE6242</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a href="../../index.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="../../3-output_data_cluster/html map/201808_map.html">Cluster Map</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Interpretation <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../4-data_interpretation/html/201808 data interpretation em scaled.html">EM Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808%20data%20interpretation%20kmeans%20scaled.html">Kmeans Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808 data interpretation.html">Data Interpretation</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imbalance Ratio <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="#">Imbalance Heatmap</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_Ratio.html">Distribution of Imbalance Ratio</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_bike_differece.html">Imbalance Bike Difference</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Optimization <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../6-optimization/html/optimization-cluster0.html">Cluster 0</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster2.html">Cluster 2</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster3.html">Cluster 3</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster4.html">Cluster 4</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id='graphDiv'></div>
+
+<script>
+    Plotly.d3.csv('../data/imbalance ratio map.csv',
+        function(err, rows){function unpack(rows, key) {return rows.map(function(row){ return row[key];
+        })};
+            // scl = [[0, 'rgb(150,0,90)'],[0.125, 'rgb(0, 0, 200)'],[0.25,'rgb(0, 25, 255)'],[0.375,'rgb(0, 152, 255)'],[0.5,'rgb(44, 255, 150)'],[0.625,'rgb(151, 255, 0)'],[0.75,'rgb(255, 234, 0)'],[0.875,'rgb(255, 111, 0)'],[1,'rgb(255, 0, 0)']];
+
+            var data = [{
+                type: 'scattermapbox',
+                mode: 'markers',
+                text:  unpack(rows, 'imbalance ratio'),
+                lon: unpack(rows, 'longitude'),
+                lat: unpack(rows, 'latitude'),
+
+                marker: {
+                    gradient: {type: 'radial', },
+                    color: unpack(rows, 'ratio'),
+                    colorscale: 'RdBu',
+                    cmin: -2,
+                    cmax: 2,
+                    reversescale: true,
+                    opacity: 0.5,
+                    size: 15,
+                    colorbar:{
+                        title: "More rentals     Imbalance ratio      More returns",
+                        thickness: 10,
+                        titleside: 'right',
+                        outlinecolor: 'rgba(68,68,68,0)',
+                        ticks: 'outside',
+                        ticklen: 3,
+                        shoticksuffix: 'last',
+                        // ticksuffix: 'inches',
+                        // dtick: 0.1
+                    }
+                },
+            }];
+
+
+            var layout = {
+                title: 'Washington DC Bike Station Imbalance Ratio Heatmap',
+                autosize: true,
+                font: {
+                    color: 'white'
+                },
+                dragmode: 'zoom',
+                mapbox: {
+                    center: {
+                        lat: 38.897957,
+                        lon: -77.036560
+                    },
+                    zoom: 10,
+                },
+                margin: {
+                    r: 20,
+                    t: 40,
+                    b: 20,
+                    l: 20,
+                    pad: 0
+                },
+                paper_bgcolor: '#191A1A',
+                plot_bgcolor: '#191A1A',
+                // showlegend: true,
+                // coloraxis: {colorscale: "RdBu"},
+
+            };
+
+            Plotly.setPlotConfig({
+                mapboxAccessToken: 'pk.eyJ1IjoiY2F0aGxpbmV3bDAxMSIsImEiOiJjamlkZGtzOTIwYWsxM3FwdGx0MWcwazZ4In0.mKMl2BmFcegpXGFK639mew'
+            });
+
+            Plotly.newPlot('graphDiv', data, layout);
+        })
+
+</script>
+</body>
+</html>
+
+

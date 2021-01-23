@@ -1,0 +1,295 @@
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>201808 pickups and returns em scaled Line Chart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CSE6242</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a href="../../index.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="../../3-output_data_cluster/html map/201808_map.html">Cluster Map</a></li>
+
+                <li class="active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Interpretation <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li  class="active" ><a href="../../4-data_interpretation/html/201808 data interpretation em scaled.html">EM Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808%20data%20interpretation%20kmeans%20scaled.html">Kmeans Scaled</a></li>
+                        <li><a href="../../4-data_interpretation/html/201808 data interpretation.html">Data Interpretation</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imbalance Ratio <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../5-imbalance_ratio/html/imbalance ratio.html">Imbalance Heatmap</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_Ratio.html">Distribution of Imbalance Ratio</a></li>
+                        <li><a href="../../7-EDA/EDA_Imbalance_bike_differece.html">Imbalance Bike Difference</a></li>
+
+                    </ul>
+                </li>
+                <li  class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Optimization <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../6-optimization/html/optimization-cluster0.html">Cluster 0</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster2.html">Cluster 2</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster3.html">Cluster 3</a></li>
+                        <li><a href="../../6-optimization/html/optimization-cluster4.html">Cluster 4</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid text-center">
+    <button onClick="window.location.reload();">Reset</button>
+
+    <p>Single-click on the legend on the left to hide one class<br>
+        Double-click on the legend on the left to isolate one class</p>
+</div>
+<div class="showcase__section" id="bubble">
+    <div class="spacer --small"></div>
+    <div id="bubbleplots">
+        <div class="'all-plot" id="allplotdiv_pickups"></div>
+        <div class="'all-plot" id="allplotdiv_returns"></div>
+<!--        <div class="bubbleplot" data-num="0">-->
+<!--            <div class="control-row">-->
+<!--                Class: <select class="classdata">-->
+<!--            </select>-->
+<!--            </div>-->
+<!--            <div class="plot" id="plotdiv_pickups"></div>-->
+<!--        </div>-->
+<!--        <div class="bubbleplot" data-num="1">-->
+<!--            <div class="control-row">-->
+<!--                Class: <select class="classdata">-->
+<!--            </select>-->
+<!--            </div>-->
+<!--            <div class="plot" id="plotdiv_returns"></div>-->
+<!--        </div>-->
+    </div>
+</div>
+
+<script>
+    Plotly.d3.csv('../data/201808_pickup_em_scaled.csv', function(err, rows){
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+        var allClasses = unpack(rows, 'EM Label'),
+            allTime = unpack(rows, 'variable'),
+            allValue = unpack(rows, 'value'),
+            listofClasses = [],
+            currentClass,
+            currentValue = [],
+            currentTime = [];
+        for (var i = 0; i < allClasses.length; i++ ){
+            if (listofClasses.indexOf(allClasses[i]) === -1 ){
+                listofClasses.push(allClasses[i]);
+            }
+        }
+
+        function getClassData(chosenClass) {
+            currentValue = [];
+            currentTime = [];
+            for (var i = 0 ; i < allClasses.length ; i++){
+                if ( allClasses[i] === chosenClass ) {
+                    currentValue.push(allValue[i]);
+                    currentTime.push(allTime[i]);
+                }
+            }
+        };
+
+        setBubblePlot('All');
+        // setBubblePlot('0');
+
+        function setBubblePlot(chosenClass) {
+            if (chosenClass === 'All') {
+                var data = [];
+                for (var i = 0; i < 5;  i++){
+                    getClassData(i.toString());
+                    var trace_i = {
+                        x: currentTime,
+                        y: currentValue,
+                        mode: 'lines+markers',
+                        marker: {
+                            size: 5,
+                            opacity: 0.5
+                        }
+                    };
+                    data.push(trace_i);
+
+                }
+                console.log(data);
+
+                var layout = {
+                    title: "201808 Pickup for All Classes (em scaled)"
+                };
+
+                Plotly.newPlot('allplotdiv_pickups', data, layout, {showSendToCloud: true});
+
+            }
+            else{
+                getClassData(chosenClass);
+                console.log(chosenClass);
+                var trace1 = {
+                    x: currentTime,
+                    y: currentValue,
+                    mode: 'lines+markers',
+                    marker: {
+                        size: 12,
+                        opacity: 0.5
+                    }
+                };
+
+                var data = [trace1];
+
+                var layout = {
+                    title: "201808 Pickup for Class: " + chosenClass +" (em scaled)"
+                };
+
+                Plotly.newPlot('plotdiv_pickups', data, layout, {showSendToCloud: true});
+            }
+
+
+
+        };
+
+        var innerContainer = document.querySelector('[data-num="0"'),
+            plotEl = innerContainer.querySelector('.plot'),
+            classSelector = innerContainer.querySelector('.classdata');
+
+        function assignOptions(textArray, selector) {
+            for (var i = 0; i < textArray.length;  i++) {
+                var currentOption = document.createElement('option');
+                currentOption.text = textArray[i];
+                selector.appendChild(currentOption);
+            }
+        }
+
+        assignOptions(listofClasses, classSelector);
+
+        function updateClass(){
+            setBubblePlot(classSelector.value);
+        }
+
+        classSelector.addEventListener('change', updateClass, false);
+    });
+    Plotly.d3.csv('../data/201808_returns_em_scaled.csv', function(err, rows){
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+        var allClasses = unpack(rows, 'EM Label'),
+            allTime = unpack(rows, 'variable'),
+            allValue = unpack(rows, 'value'),
+            listofClasses = [],
+            currentClass,
+            currentValue = [],
+            currentTime = [];
+        for (var i = 0; i < allClasses.length; i++ ){
+            if (listofClasses.indexOf(allClasses[i]) === -1 ){
+                listofClasses.push(allClasses[i]);
+            }
+        }
+
+        function getClassData(chosenClass) {
+            currentValue = [];
+            currentTime = [];
+            for (var i = 0 ; i < allClasses.length ; i++){
+                if ( allClasses[i] === chosenClass ) {
+                    currentValue.push(allValue[i]);
+                    currentTime.push(allTime[i]);
+                }
+            }
+        };
+
+        setBubblePlot('All');
+        setBubblePlot('0');
+
+        function setBubblePlot(chosenClass) {
+            if (chosenClass === 'All') {
+                var data = [];
+                for (var i = 0; i < 5;  i++){
+                    getClassData(i.toString());
+                    var trace_i = {
+                        x: currentTime,
+                        y: currentValue,
+                        mode: 'lines+markers',
+                        marker: {
+                            size: 5,
+                            opacity: 0.5
+                        }
+                    };
+                    data.push(trace_i);
+
+                }
+                console.log(data);
+
+                var layout = {
+                    title: "201808 Return for All Classes (em scaled)"
+                };
+
+                Plotly.newPlot('allplotdiv_returns', data, layout, {showSendToCloud: true});
+
+            }
+            else{
+                getClassData(chosenClass);
+                console.log(chosenClass);
+                var trace1 = {
+                    x: currentTime,
+                    y: currentValue,
+                    mode: 'lines+markers',
+                    marker: {
+                        size: 12,
+                        opacity: 0.5
+                    }
+                };
+
+                var data = [trace1];
+
+                var layout = {
+                    title: "201808 Return for Class: " + chosenClass+" (em scaled)"
+                };
+
+                Plotly.newPlot('plotdiv_returns', data, layout, {showSendToCloud: true});
+            }
+
+
+
+        };
+
+        var innerContainer = document.querySelector('[data-num="1"'),
+            plotEl = innerContainer.querySelector('.plot_returns'),
+            classSelector = innerContainer.querySelector('.classdata');
+
+        function assignOptions(textArray, selector) {
+            for (var i = 0; i < textArray.length;  i++) {
+                var currentOption = document.createElement('option');
+                currentOption.text = textArray[i];
+                selector.appendChild(currentOption);
+            }
+        }
+
+        assignOptions(listofClasses, classSelector);
+
+        function updateClass(){
+            setBubblePlot(classSelector.value);
+        }
+
+        classSelector.addEventListener('change', updateClass, false);
+    });
+</script>
+</body>
+
+
+

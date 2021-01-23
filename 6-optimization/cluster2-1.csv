@@ -1,0 +1,19 @@
+index,station_id,num_bikes_available,num_docks_available,Station,Unnamed: 0,Cluster Label,EM Label,name,longitude,latitude
+12,323,1,10,31075,69,2-1,0,Rolfe St & 9th St S,-77.076131,38.866471000000004
+10,246,2,8,31066,61,2-1,1,Columbia Pike & S Orme St,-77.072315,38.867262
+5,211,0,14,31053,52,2-1,0,Columbia Pike & S Courthouse Rd,-77.08031899999999,38.863833
+0,1,2,13,31000,0,2-1,1,Eads St & 15th St S,-77.05323,38.858971000000004
+2,170,12,2,31036,35,2-1,0,George Mason Dr & Wilson Blvd,-77.1207,38.87887
+17,476,15,0,31921,362,2-1,1,Westover Library / Washington Blvd & N McKinley Rd,-77.142317,38.886047999999995
+15,359,12,2,31902,345,2-1,0,Wilson Blvd & N Illinois St ,-77.12711999999999,38.876528
+1,156,0,11,31035,34,2-1,0,N Quincy St & Glebe Rd,-77.10773499999999,38.876393
+8,222,11,0,31059,56,2-1,0,Four Mile Run Dr & S Walter Reed Dr,-77.095431,38.847359999999995
+14,356,14,1,31094,88,2-1,0,Lee Hwy & N Kirkwood Rd,-77.09713,38.895377
+6,219,2,9,31056,54,2-1,0,Troy St & 26th St S,-77.07510400000001,38.847977
+16,398,17,2,31910,352,2-1,1,Potomac Ave & Main Line Blvd,-77.049265,38.822738
+13,346,2,13,31090,84,2-1,1,Long Bridge Park / Long Bridge Dr & 6th St S,-77.05003,38.865553000000006
+4,191,0,14,31043,42,2-1,1,Saint Asaph St & Pendleton  St,-77.044664,38.810743
+7,220,11,0,31057,55,2-1,1,Four Mile Run Dr & S Shirlington Rd,-77.085931,38.8444
+11,255,2,9,31067,62,2-1,0,Columbia Pike & S Walter Reed Dr,-77.08659899999999,38.862478
+3,175,0,11,31032,31,2-1,1,Washington Blvd & 7th St N,-77.09079200000001,38.88081
+9,245,2,9,31065,60,2-1,0,Pershing Dr & Wayne St,-77.08596,38.880705

@@ -1,0 +1,12 @@
+index,station_id,num_bikes_available,num_docks_available,Station,Unnamed: 0,Cluster Label,EM Label,name,longitude,latitude
+4,263,9,2,32000,365,4-1,1,Norfolk Ave & Fairmont St,-77.096539,38.988562
+8,389,1,9,32055,395,4-1,1,Woodmont Ave & Strathmore St,-77.093522,38.979875
+1,63,2,11,31301,224,4-1,1,Ward Circle / American University,-77.087171,38.938736
+10,487,0,17,31320,242,4-1,1,American University East Campus,-77.087128,38.936298
+2,80,0,15,31303,226,4-1,1,Tenleytown / Wisconsin Ave & Albemarle St NW,-77.079382,38.947607
+0,60,14,1,31300,223,4-1,1,Van Ness Metro / UDC,-77.063896,38.944551000000004
+3,151,0,15,31307,230,4-1,1,3000 Connecticut Ave NW / National Zoo,-77.055599,38.930282
+9,420,0,25,31319,241,4-1,1,Wisconsin Ave & Brandywine St NW,-77.080217,38.949813
+7,385,0,19,31317,239,4-1,1,Wisconsin Ave & Ingomar St NW,-77.084636,38.958267
+5,271,0,19,32014,373,4-1,1,Friendship Hts Metro / Wisconsin Ave & Wisconsin Cir,-77.085998,38.961763
+6,282,13,2,32021,376,4-1,2,47th & Elm St,-77.09199100000001,38.982456

@@ -1,0 +1,12 @@
+index,station_id,num_bikes_available,num_docks_available,Station,Unnamed: 0,Cluster Label,EM Label,name,longitude,latitude
+1,8,2,17,31007,7,4-0,2,Crystal City Metro / 18th St & S Bell St,-77.05113172531128,38.857404962615036
+0,6,0,18,31005,5,4-0,1,Pentagon City Metro / 12th St & S Hayes St,-77.059936,38.862303000000004
+7,312,15,0,31073,67,4-0,1,Washington Blvd & Walter Reed Dr ,-77.082104,38.873219
+3,129,14,1,31016,15,4-0,1,Clarendon Blvd & Pierce St,-77.076389,38.893438
+4,139,1,14,31021,20,4-0,2,Clarendon Blvd & N Fillmore St,-77.09308,38.8881
+6,201,2,8,31049,48,4-0,2,Utah St & 11th St N ,-77.113905,38.883669
+10,404,16,2,31904,347,4-0,1,East Falls Church Metro / Sycamore St & 19th St N,-77.15642720460892,38.885320719750744
+8,337,15,0,31082,76,4-0,1,Eisenhower Ave & Mill Race Ln,-77.068952,38.801111
+9,380,1,14,31097,91,4-0,1,Saint Asaph St & Madison St,-77.044097,38.812718
+5,197,1,21,31048,47,4-0,2,King St Metro South,-77.060626745224,38.80576284873485
+2,11,9,2,31010,9,4-0,1,S Glebe Rd & Potomac Ave,-77.0502,38.8426
